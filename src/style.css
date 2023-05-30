@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  animation: crossFade 50s infinite;
+}
+
+.bg {
+  aspect-ratio: 16/9;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  width: 100%;
+
+  opacity: 0!important;
+}
+
+.crossFade {
+  animation: crossFade 3600s infinite;
+}
+
+
+@keyframes crossFade {
+  0% {
+    background: red;
+  }
+  33% {
+    background: green;
+  }
+  66% {
+    background: blue;
+  }
+  100% {
+    background: red;
+  }
+}
+
+
+.hour {
+  position: absolute;
+  font-size: 5em;
+  z-index: 10;
+  color: white;
+  font-family: Impact;
+}
