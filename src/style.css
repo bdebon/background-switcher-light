@@ -21,6 +21,10 @@ body {
   animation: crossFade 3600s infinite;
 }
 
+.fade {
+    animation: fade 10s infinite ease-in;
+}
+
 
 @keyframes crossFade {
   0% {
@@ -35,4 +39,16 @@ body {
   100% {
     background: red;
   }
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    50% {
+          opacity: 1;
+      }
+    100% {
+        opacity: 0;
+    }
 }
