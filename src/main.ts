@@ -20,10 +20,7 @@ fetch(url).then(res => res.json()).then((data: {
 }) => {
   if (data.results?.sunset) {
     sunset = new Date(data.results.sunset)
-
-    sunset = new Date()
-    // add 30 minutes to the sunset
-    sunset.setMinutes(sunset.getMinutes() + 70)
+    
     updateOpacity()
   }
 })
