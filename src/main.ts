@@ -24,8 +24,6 @@ fetch(url).then(res => res.json()).then((data: {
   }
 })
 
-
-
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
     <div class="bg bg--night" style="background-image: url('/5.jpg')"></div>
