@@ -20,7 +20,9 @@ fetch(url).then(res => res.json()).then((data: {
 }) => {
   if (data.results?.sunset) {
     sunset = new Date(data.results.sunset)
-    
+
+    console.log(sunset)
+    sunset.setHours(sunset.getHours() + 1)
     updateOpacity()
   }
 })
@@ -39,19 +41,28 @@ function computeOpacity() {
 
   let sunsetHours = sunset.getHours();
 
+  console.log('Sunset:', sunset, 'Now:', now )
 
   // if now is one hour before sunset, opacity is 1
   if (now.getHours() <= sunsetHours - 1) {
     return 1
-  } else if (now.getHours() >= sunsetHours && now.getMinutes() >= sunset.getMinutes()) {
+  } else if (now.getHours() * 60 + now.getMinutes() >= sunsetHours * 60 + sunset.getMinutes()) {
     // if now is sunset, opacity is 0
     return 0
   }
 
   // otherwise, compute opacity
-  const totalMinutes = (sunsetHours - now.getHours()) * 60 + (sunset.getMinutes() - now.getMinutes())
-  const minutesPassed = 60 - totalMinutes
-  return minutesPassed / 60
+  const sunsetMinutes = sunset.getMinutes()
+  const sunsetSeconds = sunset.getSeconds()
+
+  const sunsetTotalSeconds = sunsetHours * 3600 + sunsetMinutes * 60 + sunsetSeconds
+  const nowTotalSeconds = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds()
+
+  const totalSeconds = sunsetTotalSeconds - nowTotalSeconds
+  const opacity = totalSeconds / 3600
+
+  console.log(opacity)
+  return opacity
 }
 
 
@@ -60,4 +71,4 @@ const updateOpacity = () => {
   document.querySelector<HTMLDivElement>('.bg--light')!.style.opacity = opacity.toString()
 }
 
-//setInterval(updateOpacity, 10000)
+setInterval(updateOpacity, 10000)
