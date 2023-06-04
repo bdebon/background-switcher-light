@@ -20,9 +20,6 @@ fetch(url).then(res => res.json()).then((data: {
 }) => {
   if (data.results?.sunset) {
     sunset = new Date(data.results.sunset)
-
-    console.log(sunset)
-    sunset.setHours(sunset.getHours() + 1)
     updateOpacity()
   }
 })
@@ -59,10 +56,7 @@ function computeOpacity() {
   const nowTotalSeconds = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds()
 
   const totalSeconds = sunsetTotalSeconds - nowTotalSeconds
-  const opacity = totalSeconds / 3600
-
-  console.log(opacity)
-  return opacity
+  return totalSeconds / 3600
 }
 
 
